@@ -128,7 +128,7 @@ Given a $n\times n$ Hermitian matrix $A$, we want to find $m$ extremal eigenvalu
 3. Repeat step two until convergence
 
 The (Cornelius) Lanczos algorithm is a substantially refined version of the power method, and presently the best method to solve the eigenvalue problem of Hermitian matrices.
-> Compare your implementation of the power method with the runtime of the Lanczos iteration, as implemented in `KrylovKit.jl`
+> Compare your implementation of the power method with the precision and runtime of the Lanczos iteration, as implemented in [`KrylovKit.jl`](https://github.com/Jutho/KrylovKit.jl).
 
 ## A blind run into the Ising model
-> Fix $`J=1, h=0`$. What do you expect?
+> Can you guess the energy and ground state for $J=\pm1$ and $h=0$? Plot the expectation values of the local spins. Is there a degeneracy of the ground state? What do you expect happens for $|h|\ll |J|$? Expand the energy perturbatively up to leading order in $h$ and explain. Now fix $J=\pm1$ and change $0<h<1$. Compare the perturbation theory with the numerical results. What do you see?

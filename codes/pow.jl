@@ -1,6 +1,6 @@
 using LinearAlgebra, Random, Printf
 # solve eigenvalue problem via power method
-function pow(A; b0=rand(size(A,2)), nmax=10000, outputlevel=0)
+function pow(A; b0=sparse(rand(size(A,2))), nmax=10000, outputlevel=0)
     ϵ = 1.0
     λ = 0.0
     bₖ = b0

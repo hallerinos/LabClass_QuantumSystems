@@ -1,25 +1,24 @@
 using Random
 using SparseArrays
 using KrylovKit
-using PyPlot
-pygui(true)
 
 include("pow.jl")
-let
-    Ms = [2^i for i=1:10]
-    t_KKs, t_pows = zeros(size(Ms)), zeros(size(Ms))
+include("make_figs.jl")
+Ms = [2^i for i=1:10]
+t_KKs, t_pows = zeros(size(Ms)), zeros(size(Ms))
+n_KKs, n_pows = zeros(size(Ms)), zeros(size(Ms))
+
+for dist in [rand, randn]
     for (id, M) in enumerate(Ms)
-        A = sparse(randn(M,M))
+        A = sparse(dist(M,M))
         A = A + A'
-        t_pows[id] = @elapsed λ_pow, b_pow = pow(A; outputlevel=0)
-        t_KKs[id] = @elapsed λ_KK, b_KK = eigsolve(A, randn(size(A,2)), 1, :LM)
+        t_pows[id] = @elapsed λ_pow, b_pow, info = pow(A; outputlevel=0)
+        n_pows[id] = info["numiter"]
+        t_KKs[id] = @elapsed λ_KK, b_KK, info = eigsolve(A, dist(size(A,2)), 1, :LM)
+        n_KKs[id] = info.numiter
     end
-    plt.scatter(Ms, t_pows)
-    plt.plot(Ms, t_pows, label="power method")
-    plt.scatter(Ms, t_KKs)
-    plt.plot(Ms, t_KKs, label="Lanczos (KrylovKit.jl)")
-    plt.xlabel("matrix dimension")
-    plt.ylabel("time [s]")
-    plt.legend()
-    plt.yscale("log")
+
+    make_scatter_line(Ms, t_pows, t_KKs, "power method","Lanczos (KrylovKit.jl)", "matrix dimension", "time [s]", "log", "log", "$(dist)_pow_vs_lanczos_time.png")
+
+    make_scatter_line(Ms, n_pows, n_KKs, "power method","Lanczos (KrylovKit.jl)", "matrix dimension", "number of iterations", "log", "log", "$(dist)_pow_vs_lanczos_iter.png")
 end

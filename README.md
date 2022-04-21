@@ -130,5 +130,19 @@ Given a $n\times n$ Hermitian matrix $A$, we want to find $m$ extremal eigenvalu
 The (Cornelius) Lanczos algorithm is a substantially refined version of the power method, and presently the best method to solve the eigenvalue problem of Hermitian matrices.
 > Compare your implementation of the power method with the precision and runtime of the Lanczos iteration, as implemented in [`KrylovKit.jl`](https://github.com/Jutho/KrylovKit.jl).
 
+These are the results for positive, symmetric, random matrices $A$. You can see that the power method is slightly faster than the KrylovKit, but the runtimes are overall comparable.
+
+![pow_vs_lanczos](rand_pow_vs_lanczos_time.png)
+
+If you inspect the number of iterations needed, you can see that the power method needs a couple more steps, but each step is much faster.
+![pow_vs_lanczos](rand_pow_vs_lanczos_iter.png)
+
+Let's see what happens if we make the matrix $A$ a little less "well-behaved", e.g., by removing the positivity. Then, the runtime of the power method increases a lot.
+
+![pow_vs_lanczos](randn_pow_vs_lanczos_time.png)
+
+Whereas the Lanczos is finished after a few iterations, the power method does not even converge anymore after 10000 steps!
+![pow_vs_lanczos](randn_pow_vs_lanczos_iter.png)
+
 ## A blind run into the Ising model
 > Can you guess the energy and ground state for $J=\pm1$ and $h=0$? Plot the expectation values of the local spins. Is there a degeneracy of the ground state? What do you expect happens for $|h|\ll |J|$? Expand the energy perturbatively up to leading order in $h$ and explain. Now fix $J=\pm1$ and change $0<h<1$. Compare the perturbation theory with the numerical results. What do you see?

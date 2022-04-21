@@ -1,11 +1,11 @@
-# Welcome to the Course: [Introduction to the Theory of Quantum Systems](https://wwwfr.uni.lu/recherche/fstm/dphyms/research/theory_of_mesoscopic_quantum_systems)!
+# Welcome to the Course: [Introduction to the Theory of Quantum Systems](https://github.com/hallerinos/LabClass_QuantumSystems)!
 
 During this two-day lab class, you will learn basic analytic and computational methods we use in the [Theory of Mesoscopic Quantum Systems](https://wwwfr.uni.lu/recherche/fstm/dphyms/research/theory_of_mesoscopic_quantum_systems) group.
 On both days, you will receive lectures in the morning, followed by programming sessions in the afternoon.
 We focus on two important techniques, exact diagonalization (ED) and matrix product states (MPS).
 
 You will need to develop your own codes in order to investigate an assignment, and you may choose one of three subjects, with increasing complexity
-1. The Ising model: order and disorder in quantum magnets (easy)
+1. The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets (easy)
 2. The Bose-Hubbard model: superfluids and Mott-insulators (intermediate)
 3. Topological quantum matter: exotic bound modes and non-local order parameters (advanced)
 
@@ -50,6 +50,11 @@ To get started, let's move to a particular example.
 
 ## The transverse-field Ising model (TFIM)
 The TFIM is the quantum analog of the classical (Ernst) Ising model, motivated from the study of ferromagnetism in statistical mechanics.
+The initial idea is the following: elementary magnets can only assume two values. They don't have dipolar magnetic interactions in the solid body (everything is rather screened) and their interaction range is limited to their very neighbors, resulting in a short-ranged exchange interaction.
+Futhermore, there is an external field which induces quantum fluctuations relative to the axis of the exchange interaction.
+The effect of these fluctuations in 1D is equivalent to thermal fluctuations in a 2D classical system, which can be seen in the path integral formulation.
+Furthermore, the 1D quantum Ising model is THE example of quantum phase transitions, because it can be solved analytically in full glory via the transfer-matrix method.
+Both analytic approaches will be presented if you want to pursue project 1.
 
 The Hamiltonian reads
 $$
@@ -109,7 +114,7 @@ $$
 denotes the Kronecker product.
 In order to construct the local spin operators of $\hat H$, we apply the same strategy:
 $$
-\hat S^k_n \simeq \left(\bigotimes_{j<n}\sigma^0\right)\sigma^k\left(\bigotimes_{j>n}\sigma^0\right)
+\hat S^k_n \simeq \frac12\left(\bigotimes_{j<n}\sigma^0\right)\sigma^k\left(\bigotimes_{j>n}\sigma^0\right)
 $$
 
 > Construct the operators $\hat S^k_{n}$ in a `julia` script and demonstrate that $[\hat S^k_{m}, \hat S^l_{n}]=0\ \forall m\neq n$.
@@ -121,6 +126,7 @@ If we now consider a canonical basis on every instance to be $i_n\in\{\uparrow,\
 
 ## The power method
 Given a $n\times n$ Hermitian matrix $A$, we want to find $m$ extremal eigenvalues and -vectors.
+
 > Develop a power method strategy to get the job done.
 
 1. Choose a random starting vector $b_0$
@@ -128,21 +134,106 @@ Given a $n\times n$ Hermitian matrix $A$, we want to find $m$ extremal eigenvalu
 3. Repeat step two until convergence
 
 The (Cornelius) Lanczos algorithm is a substantially refined version of the power method, and presently the best method to solve the eigenvalue problem of Hermitian matrices.
+
 > Compare your implementation of the power method with the precision and runtime of the Lanczos iteration, as implemented in [`KrylovKit.jl`](https://github.com/Jutho/KrylovKit.jl).
+Bonus: look up the Lanczos algorithm, implement it and compare your version against the power method and the optimized version in the KrylovKit.
 
 These are the results for positive, symmetric, random matrices $A$. You can see that the power method is slightly faster than the KrylovKit, but the runtimes are overall comparable.
 
-![pow_vs_lanczos](rand_pow_vs_lanczos_time.png)
-
 If you inspect the number of iterations needed, you can see that the power method needs a couple more steps, but each step is much faster.
-![pow_vs_lanczos](rand_pow_vs_lanczos_iter.png)
+
+(a)             |  (b)
+:-:|:-:
+![](rand_pow_vs_lanczos_time.png)  |  ![](rand_pow_vs_lanczos_iter.png)
 
 Let's see what happens if we make the matrix $A$ a little less "well-behaved", e.g., by removing the positivity. Then, the runtime of the power method increases a lot.
-
-![pow_vs_lanczos](randn_pow_vs_lanczos_time.png)
-
 Whereas the Lanczos is finished after a few iterations, the power method does not even converge anymore after 10000 steps!
-![pow_vs_lanczos](randn_pow_vs_lanczos_iter.png)
+
+(a)             |  (b)
+:-:|:-:
+![](randn_pow_vs_lanczos_time.png)  |  ![](randn_pow_vs_lanczos_iter.png)
 
 ## A blind run into the Ising model
-> Can you guess the energy and ground state for $J=\pm1$ and $h=0$? Plot the expectation values of the local spins. Is there a degeneracy of the ground state? What do you expect happens for $|h|\ll |J|$? Expand the energy perturbatively up to leading order in $h$ and explain. Now fix $J=\pm1$ and change $0<h<1$. Compare the perturbation theory with the numerical results. What do you see?
+Now that we know a bit about how to numerically solve the eigenvalue problem, let's go back to the Ising model and apply it to our first physics problem.
+
+> Can you guess the energy and ground state for $J=\pm4$ and $h=0$?
+Is there a degeneracy of the ground state? What do you expect happens for $|h|\ll |J|$? 
+
+Let's consider the case of $J=-1$ and $h=0$.
+In this case, the Hamiltonian is simply 
+$$
+\hat H = -4\sum_{\braket{i,j}}\hat S^z_{i}\hat S^z_{j}
+$$
+and we need to find the state which minimizes the energy $\braket{\hat H}$.
+The Hamiltonian obviously commutes with $\hat S^z_j$, and therefore there exists a common eigenbasis of $\hat H$ and all $\{\hat S^z_j\}$ which are $\{\ket{\uparrow_j},\ket{\downarrow_j}\}$ with eigenvalues $\pm1/2$.
+If adjacent spins are aligned, $\ket{\uparrow_j\uparrow_{j+1}}$ or $\ket{\downarrow_j\downarrow_{j+1}}$, they contribute with energy $-1$, and if they are anti-aligned, $\ket{\uparrow_j\downarrow_{j+1}}$ or $\ket{\downarrow_j\uparrow_{j+1}}$, they contribute with energy $+1$.
+There are two orthogonal states which minimize the energy, $\ket{\Psi_\uparrow}$ and $\ket{\Psi_\downarrow}$, which are related by the operator $\hat X \simeq \prod_j\sigma^x$.
+Note that this operator, together with the identity, forms a group under multiplication.
+
+> Describe two more trivial examples of $\mathbb Z_2$, involving integer numbers. Show that $X$ is a symmetry of the Ising model, i.e. $[\hat H,\hat X]=0$. What does that mean?
+
+The lowest energy state is two-fold degenerate, and the most general ground state is $\ket\Psi = \alpha \ket{\Psi_\uparrow} + \sqrt{1-\alpha^2}\ket{\Psi_\downarrow}$.
+However, the system is not truly "quantum".
+What we mean by that is that the degenerate ground state is infinitely sensitive to perturbations, and therefore leads to a so-called spontaneously symmetry-broken state in the thermodynamic limit.
+
+> Consider a perturbation of the form $-h_z \sum_j\hat S^z_j$ (with $h_z>0$). What happens to the degenerate $\mathbb Z_2$ symmetric ground state $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$? Make your statement formal by a first order perturbation theory.
+
+Note that we may always choose a basis which is diagonal in $\hat H$ and $\hat X$.
+The $\mathbb Z_2$ symmetric ground states are $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$, which have eigenvalues $\pm1$.
+We will now investigate the effect of a local symmetry-breaking perturbation $-h_z \sum_j\hat S^z_j$ (with $h_z>0$).
+We find
+$$
+-h_z\sum_j\braket{\Psi_s |\hat S^z_j | \Psi_{s'}} = -\sum_j\frac{h_z}4\left(\bra{\Psi_\uparrow}+s\bra{\Psi_\downarrow}\right)\left(\ket{\Psi_\uparrow}-s'\ket{\Psi_\downarrow}\right) = -\sum_j\frac{h_z}4\left(1-ss'\right),
+$$
+which vanishes for $s=s'$, and leads to $-\frac{h_z N}2$ for $s=-s'$.
+The leading order PT eigenstates are therefore the eigenstates of $\sigma_x$ in the ordered basis $\{\ket{\Psi_+},\ket{\Psi_-}\}$, i.e.
+$$
+\frac1{\sqrt2}\left(\ket{\Psi_+}+\ket{\Psi_-}\right) = \ket{\Psi_\uparrow}
+,\
+\frac1{\sqrt2}\left(\ket{\Psi_+}-\ket{\Psi_-}\right) = \ket{\Psi_\downarrow}.
+$$
+We could already have guessed that from the start, because it is trivial to see that
+$$
+\braket{\Psi_\uparrow | \hat H - h_z \sum_j\hat S^z_j | \Psi_\uparrow} = -JN/4 - h_zN/2
+$$
+and
+$$
+\braket{\Psi_\downarrow | \hat H - h_z \sum_j\hat S^z_j | \Psi_\downarrow} = -JN/4 + h_zN/2
+$$
+which is also our conclusion from degenerate PT, i.e. $E^{(0)}=-JN/4$ and $\Delta E^{(1)} = \mp h_zN/2$ for the $\pm$ eigenstates of $\sigma_x$ in the ordered basis $\{\ket{\Psi_+},\ket{\Psi_-}\}$.
+
+We therefore conclude that
+$$
+\lim_{h_z\rightarrow0}\lim_{N\rightarrow\infty}\braket{\hat S^z_i}\neq 0
+$$
+signals a spontaneously broken symmetry.
+Note that two limits do not commute, because for finite systems, we have a common eigenbasis of $\hat X$ and $\hat H$, such that
+$$
+\braket{\hat S^z_i} = \braket{\hat X\hat S^z_i\hat X} = -\braket{\hat S^z_i} \Rightarrow \lim_{h_z\rightarrow\infty}\braket{\hat S^z_i} = 0
+$$
+and therefore,
+$$
+\lim_{N\rightarrow\infty}\lim_{h_z\rightarrow0}\braket{\hat S^z_i} = 0.
+$$
+Another way to detect spontaneous symmetry breaking without a small (symmetry breaking) field is to look for long range order in correlation functions:
+$$
+\braket{\hat S^z_i\hat S^z_j} \neq 0,
+$$
+even as $|i-j|\rightarrow\infty$ (it evaluates to $1/4$ if $h=0$).
+
+
+> Now that we have an idea of the physics, try to confirm our intuition numerically.
+
+The result should look somewhat like this:
+If you set $J=4$, you will see a quantum phase transition at $h=2$ (marked by a dashed line).
+On the left hand side, you see the ordered phase.
+The clear indicator is the presence of long-range order through the correlation function $\braket{\hat S^z_i\hat S^z_{i+1}}$. 
+Note that $\braket{\hat S^z_i}=0$, which means that numerically we see fluctuations on the order of machine precision, i.e. $\mathcal O(10^{-16})$.
+This is in contrast to $\braket{\hat S^x_i\hat S^x_{i+1}}$, which decouples to 
+$$
+\braket{\hat S^x_i\hat S^x_{i+1}} \approx \braket{\hat S^x_i}\braket{\hat S^x_{i+1}}
+$$
+in the disordered phase.
+Furthermore, you see a clear onset of the paramagnetic phase through a polarization $M_x = \frac1N\sum_j\braket{\hat S^x_i}\approx1/2$.
+
+![](ising_phases.png)

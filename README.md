@@ -170,13 +170,13 @@ If adjacent spins are aligned, $\ket{\uparrow_j\uparrow_{j+1}}$ or $\ket{\downar
 There are two orthogonal states which minimize the energy, $\ket{\Psi_\uparrow}$ and $\ket{\Psi_\downarrow}$, which are related by the operator $\hat X \simeq \prod_j\sigma^x$.
 Note that this operator, together with the identity, forms a group under multiplication.
 
-> Describe two more trivial examples of $\mathbb Z_2$, involving integer numbers. Show that $X$ is a symmetry of the Ising model, i.e. $[\hat H,\hat X]=0$. What does that mean?
+> Describe two more trivial examples of $\mathbb Z_2$, involving integer numbers. Show that $\hat X$ is a symmetry of the Ising model, i.e. $[\hat H,\hat X]=0$. What does that mean?
 
 The lowest energy state is two-fold degenerate, and the most general ground state is $\ket\Psi = \alpha \ket{\Psi_\uparrow} + \sqrt{1-\alpha^2}\ket{\Psi_\downarrow}$.
 However, the system is not truly "quantum".
-What we mean by that is that the degenerate ground state is infinitely sensitive to perturbations, and therefore leads to a so-called spontaneously symmetry-broken state in the thermodynamic limit.
+What we mean by that is that the degenerate ground state is infinitely sensitive to perturbations, which leads to a so-called spontaneously symmetry-broken state in the thermodynamic limit.
 
-> Consider a perturbation of the form $-h_z \sum_j\hat S^z_j$ (with $h_z>0$). What happens to the degenerate $\mathbb Z_2$ symmetric ground state $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$? Make your statement formal by a first order perturbation theory.
+> Consider a perturbation of the form $-h_z \sum_j\hat S^z_j$ (with $h_z>0$). What happens to the degenerate $\mathbb Z_2$ symmetric ground state $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$? Make your statement formal by a first order perturbation theory. From your result, argue that the unperturbed model in the thermodynamic limit can be approached in two different (non-commuting) limits.
 
 Note that we may always choose a basis which is diagonal in $\hat H$ and $\hat X$.
 The $\mathbb Z_2$ symmetric ground states are $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$, which have eigenvalues $\pm1$.
@@ -223,9 +223,9 @@ $$
 even as $|i-j|\rightarrow\infty$ (it evaluates to $1/4$ if $h=0$).
 
 
-> Now that we have an idea of the physics, try to confirm our intuition numerically.
+> Now that you have an idea of the underlying physics, try to confirm your intuition numerically.
 
-The result should look somewhat like this:
+The result is as follows:
 If you set $J=4$, you will see a quantum phase transition at $h=2$ (marked by a dashed line).
 On the left hand side, you see the ordered phase.
 The clear indicator is the presence of long-range order through the correlation function $\braket{\hat S^z_i\hat S^z_{i+1}}$. 

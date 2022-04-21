@@ -202,19 +202,20 @@ $$
 $$
 which is also our conclusion from degenerate PT, i.e. $E^{(0)}=-JN/4$ and $\Delta E^{(1)} = \mp h_zN/2$ for the $\pm$ eigenstates of $\sigma_x$ in the ordered basis $\{\ket{\Psi_+},\ket{\Psi_-}\}$.
 
-We therefore conclude that
-$$
-\lim_{h_z\rightarrow0}\lim_{N\rightarrow\infty}\braket{\hat S^z_i}\neq 0
-$$
-signals a spontaneously broken symmetry.
-Note that two limits do not commute, because for finite systems, we have a common eigenbasis of $\hat X$ and $\hat H$, such that
+For finite and unperturbed systems, we have a common eigenbasis of $\hat X$ and $\hat H$, such that
 $$
 \braket{\hat S^z_i} = \braket{\hat X\hat S^z_i\hat X} = -\braket{\hat S^z_i} \Rightarrow \lim_{h_z\rightarrow\infty}\braket{\hat S^z_i} = 0
 $$
-and therefore,
+which leads to the following statement,
 $$
 \lim_{N\rightarrow\infty}\lim_{h_z\rightarrow0}\braket{\hat S^z_i} = 0.
 $$
+Note from our PT argument, that the two limits do not commute!
+This leads us to the following important conclusion, that
+$$
+\lim_{h_z\rightarrow0}\lim_{N\rightarrow\infty}\braket{\hat S^z_i}\neq 0
+$$
+signals the spontaneously broken $\mathbb Z_2$ symmetry of the Ising model.
 Another way to detect spontaneous symmetry breaking without a small (symmetry breaking) field is to look for long range order in correlation functions:
 $$
 \braket{\hat S^z_i\hat S^z_j} \neq 0,

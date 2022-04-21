@@ -1,4 +1,4 @@
-# Welcome to the Course: [Introduction to the Theory of Quantum Systems](https://github.com/hallerinos/LabClass_QuantumSystems)!
+# [Theory of Quantum Systems for Beginners](https://github.com/hallerinos/LabClass_QuantumSystems)
 
 During this two-day lab class, you will learn basic analytic and computational methods we use in the [Theory of Mesoscopic Quantum Systems](https://wwwfr.uni.lu/recherche/fstm/dphyms/research/theory_of_mesoscopic_quantum_systems) group.
 On both days, you will receive lectures in the morning, followed by programming sessions in the afternoon.

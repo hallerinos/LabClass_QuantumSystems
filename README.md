@@ -46,9 +46,7 @@ The expectation value of any operator, initially expressed in the canonical basi
 $$
 \braket{\psi_i|\hat O|\psi_j} = O^\phi_{mn}\braket{\psi_j|\phi_m}\braket{\phi_n|\psi_j} = (U^{\phi\dag} O^\phi U^\phi)_{ij}
 $$
-
-That's about all we need to get started.
-So let's move to a particular example and figure out the missing steps along the way.
+To get started, let's move to a particular example.
 
 ## The transverse-field Ising model (TFIM)
 The TFIM is the quantum analog of the classical (Ernst) Ising model, motivated from the study of ferromagnetism in statistical mechanics.
@@ -118,6 +116,19 @@ $$
 > Use the operators to construct the Hamiltonian.
 
 If we now consider a canonical basis on every instance to be $i_n\in\{\uparrow,\downarrow\}$ in the $\hat S^z$ basis, we see that the Hilbert space has dimension $2^N$.
-> Consider $N=8,16,32,64$ instances and assume that each coefficient of $C_{\{i_n\}}$ is a `float64`. How much memory is needed to store the wavefunction? How much memory do you need for a naive matrix expression of $H$? What is the maximum $N$ that you can simulate on your laptop? What if the Hamiltonian is perturbed by just a single term $\hat S^y_{\bm r_i}$?
 
-## The Lanczos algorithm
+> Consider $N=8,16,32,64$ instances and assume that each coefficient of $C_{\{i_n\}}$ is a `float64`. How much memory is needed to store the wavefunction? How much memory do you need for a naïve matrix expression of $H$? What is the maximum $N$ that you can simulate on your laptop? What if the Hamiltonian is perturbed by just a single term $\hat S^y_{\bm r_i}$?
+
+## The power method
+Given a $n\times n$ Hermitian matrix $A$, we want to find $m$ extremal eigenvalues and -vectors.
+> Develop a power method strategy to get the job done.
+
+1. Choose a random starting vector $b_0$
+2. Construct $b_{k+1} = \frac{A b_k}{|Ab_k|}$
+3. Repeat step two until convergence
+
+The (Cornelius) Lanczos algorithm is a substantially refined version of the power method, and presently the best method to solve the eigenvalue problem of Hermitian matrices.
+> Compare your implementation of the power method with the runtime of the Lanczos iteration, as implemented in `KrylovKit.jl`
+
+## A blind run into the Ising model
+> Fix $`J=1, h=0`$. What do you expect?

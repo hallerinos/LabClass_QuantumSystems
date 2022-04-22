@@ -2,23 +2,41 @@ using LinearAlgebra
 using SparseArrays
 using KrylovKit
 using PyPlot
+using DataFrames
 # pygui(true)
 
 σ0 = sparse([1 0; 0  1])
 σx = sparse([0 1; 1  0])
+σy = sparse([0 -1im; 1im  0])
 σz = sparse([1 0; 0 -1])
+
+function is_commuting(O1, O2; ops)
+    res = DataFrame(n1=Int[], n2=Int[], is_commuting=Vector{Bool}[])
+    for (i1,o1) in enumerate(O1), (i2,o2) in enumerate(O2)
+        # @show i1, i2, o1*o2 - o2*o1 ≈ spzeros(size(o1))
+        commutator = o1*o2 - o2*o1
+        is_commuting = [(commutator ≈ o) for o in ops]
+        if !any(is_commuting)
+            @info "ooops, O1 and O2 don't satisfy commutation relations"
+        end
+        push!(res, (i1, i2, is_commuting))
+    end
+    return res
+end
 
 function generate_ops(σx, σz, N)
     d = size(σ0,1)
     Sx = Vector{SparseMatrixCSC{Float64, Int64}}(undef, N)
+    Sy = Vector{SparseMatrixCSC{ComplexF64, Int64}}(undef, N)
     Sz = Vector{SparseMatrixCSC{Float64, Int64}}(undef, N)
     for n=1:N
         Dn = d^(n-1)
         DN = d^(N-n)
         Sx[n] = 0.5*kron(sparse(I,Dn,Dn), σx, sparse(I,DN,DN))
+        Sy[n] = 0.5*kron(sparse(I,Dn,Dn), σy, sparse(I,DN,DN))
         Sz[n] = 0.5*kron(sparse(I,Dn,Dn), σz, sparse(I,DN,DN))
     end
-    return Sx, Sz
+    return Sx, Sy, Sz
 end
 
 function generate_H(Sx, Sz; J=4, h=0, pbc=false)
@@ -46,7 +64,7 @@ let
     Mxs, Mzs, SxSxs, SzSzs = [zeros(length(Ns), length(Js), length(hs), nev) for i=1:4]
     for (idJ, J) in enumerate(Js), (idh, h) in enumerate(hs), (idN, N) in enumerate(Ns)
         @info "Simulation: N=$N, J=$J, h=$h"
-        Sx, Sz = generate_ops(σx, σz, N)
+        Sx, Sy, Sz = generate_ops(σx, σz, N)
         Ĥ = generate_H(Sx, Sz; J=J, h=-h, pbc=pbc)
         E, Ψ, info = eigsolve(Ĥ, nev, :SR, eltype(Ĥ), issymmetric=true, krylovdim=max(nev,kdmin), tol=tol)
         ord = sortperm(E)

@@ -1,5 +1,10 @@
-using LinearAlgebra, Random, SparseArrays
+# using Pandas
+# using LinearAlgebra
+# using Random
+using SparseArrays
 
+
+##
 N = 12
 Sx = Vector{SparseMatrixCSC{Float64, Int64}}(undef, N)
 A,B = [rand(10,10) for i=1:2]

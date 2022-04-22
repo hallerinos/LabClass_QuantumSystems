@@ -1,0 +1,15 @@
+using PyPlot
+function make_scatter_line(X,Y1,Y2,l1,l2,xlbl,ylbl,xscl,yscl,fn)
+    plt.figure()
+    plt.scatter(X, Y1)
+    plt.plot(X, Y1, label=l1)
+    plt.scatter(X, Y2)
+    plt.plot(X, Y2, label=l2)
+    plt.xlabel(xlbl)
+    plt.ylabel(ylbl)
+    plt.legend()
+    plt.yscale(xscl)
+    plt.xscale(yscl)
+    plt.savefig("$(fn)")
+    plt.close()
+end

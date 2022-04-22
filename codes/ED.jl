@@ -2,7 +2,7 @@ using LinearAlgebra
 using SparseArrays
 using KrylovKit
 using PyPlot
-pygui(true)
+# pygui(true)
 
 σ0 = sparse([1 0; 0  1])
 σx = sparse([0 1; 1  0])
@@ -34,7 +34,7 @@ function generate_H(Sx, Sz; J=4, h=0, pbc=false)
 end
 
 let 
-    Ns = [6 12 18]
+    Ns = [6 12]
     pbc = true
     tol = eps()
     nev = 1
@@ -45,7 +45,7 @@ let
     
     Mxs, Mzs, SxSxs, SzSzs = [zeros(length(Ns), length(Js), length(hs), nev) for i=1:4]
     for (idJ, J) in enumerate(Js), (idh, h) in enumerate(hs), (idN, N) in enumerate(Ns)
-        @info N
+        @info "Simulation: N=$N, J=$J, h=$h"
         Sx, Sz = generate_ops(σx, σz, N)
         Ĥ = generate_H(Sx, Sz; J=J, h=-h, pbc=pbc)
         E, Ψ, info = eigsolve(Ĥ, nev, :SR, eltype(Ĥ), issymmetric=true, krylovdim=max(nev,kdmin), tol=tol)
@@ -74,5 +74,5 @@ let
     plt.text(0.01, 0.1, "ordered phase")
     plt.text(5, 0.0075, "disordered phase")
     plt.legend()
-    plt.savefig("ising_phases.png")
+    plt.savefig("ising_phases.png", dpi=600)
 end

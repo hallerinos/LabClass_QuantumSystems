@@ -10,6 +10,6 @@ function make_scatter_line(X,Y1,Y2,l1,l2,xlbl,ylbl,xscl,yscl,fn)
     plt.legend()
     plt.yscale(xscl)
     plt.xscale(yscl)
-    plt.savefig("$(fn)")
+    plt.savefig("$(fn)", dpi=600)
     plt.close()
 end

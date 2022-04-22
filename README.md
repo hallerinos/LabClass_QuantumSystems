@@ -68,7 +68,7 @@ $$
 $$
 and they can be represented in terms of the Pauli matrices
 $$
-\hat S^i \simeq \frac{i\hbar}2\sigma^i,
+\hat S^i \simeq \frac{\hbar}2\sigma^i,
 $$
 
 $$

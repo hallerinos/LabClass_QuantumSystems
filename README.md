@@ -104,11 +104,11 @@ We don't need to be careful about that because $a$ does not enter in $\hat H$, a
 
 Remember that a general many-body state, composed by $N$ instances of a local Hilbert space $\ket{i_n}\in\mathcal H_n$, reads
 $$
-\ket\Psi = \sum_{\{i_n\}}C_{i_1,i_2,\dots,i_n}\ket{i_1,i_2,\dots,i_n}
+\ket\Psi = \sum_{\{i_n\}}C_{i_1,i_2,\dots,i_L}\ket{i_1,i_2,\dots,i_L}
 $$
 where
 $$
-\ket{i_1,i_2,\dots,i_n} = \ket{i_1}\otimes\ket{i_2}\otimes\dots\otimes\ket{i_n}
+\ket{i_1,i_2,\dots,i_L} = \ket{i_1}\otimes\ket{i_2}\otimes\dots\otimes\ket{i_L}
 $$
 denotes the Kronecker product.
 In order to construct the local spin operators of $\hat H$, we apply the same strategy:
@@ -236,11 +236,20 @@ Furthermore, you see a clear onset of the paramagnetic phase through a polarizat
 ![](ising_phases.png)
 
 # Bose-Hubbard model
-The Hamiltonian of the Bose-Hubbard model reads
+The Hamiltonian of the one-dimensional Bose-Hubbard model reads
 $$
-\hat H = -t\sum_{\braket{i,j}}\hat a^\dag_{i}\hat a^{\vphantom\dag}_{j} - \mu\sum_i\hat n_i + \frac U2\sum_i\hat n_i(\hat n_i-1)
+\hat H = -t\sum_{\braket{i,j}}\hat a^\dag_{i}\hat a^{\vphantom\dag}_{j} - \mu\sum_{i=1}^L\hat n_i + \frac U2\sum_{i=1}^L\hat n_i(\hat n_i-1)
 $$
-and describes bosonic particles hopping on a discrete lattice with on-site interaction $U$ and $\hat n_i = \hat a^\dag_{i}\hat a^{\vphantom\dag}_{i}$.
+and describes bosonic particles hopping on a discrete chain with a chemical potential $\mu$, on-site interaction $U$ and $\hat n_i = \hat a^\dag_{i}\hat a^{\vphantom\dag}_{i}$.
 
-> What relation do the operators satisfy? Under which transformations stays the Hamiltonian invariant up to a constant ($\hat a_i\rightarrow?$, $\hat n_i\rightarrow?$)? What is a canonical basis of the local Hilbert space for many-body states of the Bose-Hubbard model and why? How big is the local Hilbert space? What changes when $U\rightarrow\infty$, how can you remove the energy divergence on an operator level (what are the allowed values for $\hat n_i$)? What does this imply for $\hat a_i$ and how does this affect the commutation relations? Write the Bose-Hubbard Hamiltonian in the "hard-core" limit $U\rightarrow\infty$ in terms of $\hat S^{i}$ and discuss how it differs from the Ising model. Find out how this model is called.
+> What are the relations for $[\hat a_i, \hat a_j^\dag]$? Compute $[\hat a_i, \hat n_j]$. Under which transformations stays the Hamiltonian invariant up to a constant ($\hat a_i\rightarrow?$, $\hat n_i\rightarrow?$)? Compute $[H, \hat n_l]$, what does it imply for $\hat N = \sum_i\hat n_i$? Explain what you find and detail its consequences for the full Hilbert space $\mathcal H$.
 
+> Consider the local limit $t=0$, $L=1$. Determine the condition for $n_0$ such that the energy is minimized: $n_0(\mu,U) = \min_{n\in\mathbb N}E(n,\mu,U)$ with $E(n,\mu,U)=\braket{n|\hat H|n}$. Plot $E(n_0,\mu,U)$ and $n_0(\mu,U)$ for $-1<\mu/U<2$.
+
+> How big is the local Hilbert space? Suppose that a trial state consists of $N=L+1$ particles. Comment on the lowest energy in the limit $U\rightarrow\infty$? What is the minimum interaction energy $\frac U2\sum_i\braket{\hat n_i(\hat n_i-1)}$ for states with $N\leq L$ in the limit $U\rightarrow\infty$? Use these arguments to comment on the most probable values for $n_i$ of low-energy states in the strongly interacting case $U\gg t,\mu$.
+ 
+> Fix the maximum value of $n_i$ for all sites to an arbitrary integer $d\geq2$. Find the matrix representations of $\hat n_i$ and $\hat a_i$ in the restricted Hilbert space. Compute the commutation relations of $\hat a_i$ in the restricted Hilbert space. What do you find? Write the Bose-Hubbard Hamiltonian in the "hard-core" limit $U\rightarrow\infty$ ($d=2$) in terms of $\hat S^{i}$. Bonus: Find out how this model is called.
+ 
+> Diagonalize the Hamiltonian and compute the average particle number $n(\mu,U) = \braket{\hat N}/L$, the average of $a(\mu,U) = \frac1L\sum_i\braket{\hat a_i}$ and $j(\mu,U) = \braket{\hat a^\dag_{c}\hat a^{\vphantom\dag}_{c+1}}$ where $c$ is the center site of your chain. Plot your observables as a function of $(1/U,\mu)$. Discuss your results.
+
+> Plot the real space distribution of $a_i(\mu, U) = \braket{\hat a_i}$. Comment on how you can use this information to diagonalize the Hamiltonian more efficiently. Bonus: Derive an analytic solution of the Bose-Hubbard model with the mean-field approximation.

@@ -30,22 +30,22 @@ In a typical situation, the Hamiltonian is written in a canonical basis (e.g. in
 
 > Convince yourself that the eigendecomposition of $H^\phi_{mn}$ leads to the spectral decomposition of $\hat H$.
 
-<!-- A diagonalization of the Hamiltonian matrix $H^\phi = U^\phi D U^{\phi\dag}$ will always lead to a unitary transformation of the form
+A diagonalization of the Hamiltonian matrix $H^\phi = U^\phi D U^{\phi\dag}$ will always lead to a unitary transformation of the form
 $$
 \hat H = (U^\phi D U^{\phi\dag})_{mn}\ket{\phi_m}\bra{\phi_n}
 = U^\phi_{mk} D_k U^{\phi*}_{nk}\ket{\phi_m}\bra{\phi_n}
 = D_k\ket{\psi_k'}\bra{\psi_k'}
 $$
-A comparison with the Schrödinger equation then leads to $D_k=E_k$ and $\ket{\psi_k}=\ket{\psi'_k}$ up to an irrelevant arbitrary phase. -->
+A comparison with the Schrödinger equation then leads to $D_k=E_k$ and $\ket{\psi_k}=\ket{\psi'_k}$ up to an irrelevant arbitrary phase.
 
 Now, if we want to measure eigenstate observables in the canonical basis, they can be expressed in terms of the unitary transformation $U$ which diagonalizes $H^\phi$.
 
 > Find a formula for the expectation value of a general Hermitian operator $\braket{\psi_i|\hat O|\psi_j}$. Double-check your result by computing $\braket{\psi_i|\hat H|\psi_j}$.
 
-<!-- The expectation value of any operator, initially expressed in the canonical basis, can then be expressed in terms of the unitary rotation of $H$ to the diagonal basis, i.e.
+The expectation value of any operator, initially expressed in the canonical basis, can then be expressed in terms of the unitary rotation of $H$ to the diagonal basis, i.e.
 $$
 \braket{\psi_i|\hat O|\psi_j} = O^\phi_{mn}\braket{\psi_j|\phi_m}\braket{\phi_n|\psi_j} = (U^{\phi\dag} O^\phi U^\phi)_{ij}
-$$ -->
+$$
 
 ## The transverse-field Ising model (TFIM)
 The TFIM is the quantum analog of the classical (Ernst) Ising model, motivated from the study of ferromagnetism in statistical mechanics.
@@ -125,16 +125,16 @@ Given a $n\times n$ Hermitian matrix $A$, we want to find $m$ extremal eigenvalu
 
 > Develop a method to get the job done.
 
-<!-- 1. Choose a random starting vector $b_0$
+1. Choose a random starting vector $b_0$
 1. Construct $b_{k+1} = \frac{A b_k}{|Ab_k|}$
-2. Repeat step two until convergence -->
+2. Repeat step two until convergence
 
-<!-- The (Cornelius) Lanczos algorithm is a substantially refined version of the power method, and presently the best method to solve the eigenvalue problem of Hermitian matrices. -->
+The (Cornelius) Lanczos algorithm is a substantially refined version of the power method, and presently the best method to solve the eigenvalue problem of Hermitian matrices.
 
 > Compare your implementation with the precision and runtime of an appropriate implementation in [`KrylovKit.jl`](https://github.com/Jutho/KrylovKit.jl).
 Bonus: look up the Lanczos algorithm, implement it and compare your version against the KrylovKit.
 
-<!-- These are the results for positive, symmetric, random matrices $A$. You can see that the power method is slightly faster than the KrylovKit, but the runtimes are overall comparable.
+These are the results for positive, symmetric, random matrices $A$. You can see that the power method is slightly faster than the KrylovKit, but the runtimes are overall comparable.
 
 If you inspect the number of iterations needed, you can see that the power method needs a couple more steps, but each step is much faster.
 
@@ -147,7 +147,7 @@ Whereas the Lanczos is finished after a few iterations, the power method does no
 
 (a)             |  (b)
 :-:|:-:
-![](randn_pow_vs_lanczos_time.png)  |  ![](randn_pow_vs_lanczos_iter.png) -->
+![](randn_pow_vs_lanczos_time.png)  |  ![](randn_pow_vs_lanczos_iter.png)
 
 ## A blind run into the Ising model
 Now that we know a bit about how to numerically solve the eigenvalue problem, let's go back to the Ising model and apply it to our first physics problem.
@@ -155,7 +155,7 @@ Now that we know a bit about how to numerically solve the eigenvalue problem, le
 > Can you guess the energy and ground state for $J=\pm4$ and $h=0$?
 Is there a degeneracy of the ground state? What do you expect happens for $|h|\ll |J|$? 
 
-<!-- Let's consider the case of $J=-1$ and $h=0$.
+Let's consider the case of $J=-1$ and $h=0$.
 In this case, the Hamiltonian is simply 
 $$
 \hat H = -4\sum_{\braket{i,j}}\hat S^z_{i}\hat S^z_{j}
@@ -164,7 +164,7 @@ and we need to find the state which minimizes the energy $\braket{\hat H}$.
 The Hamiltonian obviously commutes with $\hat S^z_j$, and therefore there exists a common eigenbasis of $\hat H$ and all $\{\hat S^z_j\}$ which are $\{\ket{\uparrow_j},\ket{\downarrow_j}\}$ with eigenvalues $\pm1/2$.
 If adjacent spins are aligned, $\ket{\uparrow_j\uparrow_{j+1}}$ or $\ket{\downarrow_j\downarrow_{j+1}}$, they contribute with energy $-1$, and if they are anti-aligned, $\ket{\uparrow_j\downarrow_{j+1}}$ or $\ket{\downarrow_j\uparrow_{j+1}}$, they contribute with energy $+1$.
 There are two orthogonal states which minimize the energy, $\ket{\Psi_\uparrow}$ and $\ket{\Psi_\downarrow}$, which are related by the operator $\hat X \simeq \prod_j\sigma^x$.
-Note that this operator, together with the identity, forms a group under multiplication. -->
+Note that this operator, together with the identity, forms a group under multiplication.
 
 > Describe two more trivial examples of $\mathbb Z_2$, involving integer numbers. Show that $\hat X$ is a symmetry of the Ising model, i.e. $[\hat H,\hat X]=0$. What does that mean?
 
@@ -174,7 +174,7 @@ What we mean by that is that the degenerate ground state is infinitely sensitive
 
 > Consider a perturbation of the form $-h_z \sum_j\hat S^z_j$ (with $h_z>0$). What happens to the degenerate $\mathbb Z_2$ symmetric ground state $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$? Make your statement formal by a first order perturbation theory. From your result, argue that the unperturbed model in the thermodynamic limit can be approached in two different (non-commuting) limits.
 
-<!-- Note that we may always choose a basis which is diagonal in $\hat H$ and $\hat X$.
+Note that we may always choose a basis which is diagonal in $\hat H$ and $\hat X$.
 The $\mathbb Z_2$ symmetric ground states are $\ket{\Psi_\pm} = \frac1{\sqrt2}\left(\ket{\Psi_\uparrow}\pm\ket{\Psi_\downarrow}\right)$, which have eigenvalues $\pm1$.
 We will now investigate the effect of a local symmetry-breaking perturbation $-h_z \sum_j\hat S^z_j$ (with $h_z>0$).
 We find
@@ -216,12 +216,12 @@ Another way to detect spontaneous symmetry breaking without a small (symmetry br
 $$
 \braket{\hat S^z_i\hat S^z_j} \neq 0,
 $$
-even as $|i-j|\rightarrow\infty$ (it evaluates to $1/4$ if $h=0$). -->
+even as $|i-j|\rightarrow\infty$ (it evaluates to $1/4$ if $h=0$).
 
 
 > Now that you have an idea of the underlying physics, try to confirm your intuition numerically.
 
-<!-- The result is as follows:
+The result is as follows:
 If you set $J=4$, you will see a quantum phase transition at $h=2$ (marked by a dashed line).
 On the left hand side, you see the ordered phase.
 The clear indicator is the presence of long-range order through the correlation function $\braket{\hat S^z_i\hat S^z_{i+1}}$. 
@@ -233,4 +233,14 @@ $$
 in the disordered phase.
 Furthermore, you see a clear onset of the paramagnetic phase through a polarization $M_x = \frac1N\sum_j\braket{\hat S^x_i}\approx1/2$.
 
-![](ising_phases.png) -->
+![](ising_phases.png)
+
+# Bose-Hubbard model
+The Hamiltonian of the Bose-Hubbard model reads
+$$
+\hat H = -t\sum_{\braket{i,j}}\hat a^\dag_{i}\hat a^{\vphantom\dag}_{j} - \mu\sum_i\hat n_i + \frac U2\sum_i\hat n_i(\hat n_i-1)
+$$
+and describes bosonic particles hopping on a discrete lattice with on-site interaction $U$ and $\hat n_i = \hat a^\dag_{i}\hat a^{\vphantom\dag}_{i}$.
+
+> What relation do the operators satisfy? Under which transformations stays the Hamiltonian invariant up to a constant ($\hat a_i\rightarrow?$, $\hat n_i\rightarrow?$)? What is a canonical basis of the local Hilbert space for many-body states of the Bose-Hubbard model and why? How big is the local Hilbert space? What changes when $U\rightarrow\infty$, how can you remove the energy divergence on an operator level (what are the allowed values for $\hat n_i$)? What does this imply for $\hat a_i$ and how does this affect the commutation relations? Write the Bose-Hubbard Hamiltonian in the "hard-core" limit $U\rightarrow\infty$ in terms of $\hat S^{i}$ and discuss how it differs from the Ising model. Find out how this model is called.
+

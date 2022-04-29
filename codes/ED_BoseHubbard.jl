@@ -2,16 +2,16 @@ using KrylovKit, DataFrames, PyPlot, CSV
 include("bosonic_ops.jl")
 include("generate_lattice_ops.jl")
 
-L = 6
+L = 10
 d = 4
-ts = LinRange(0, 0.5, 21)
+ts = LinRange(0, 0.5, 41)
 # ts = [1]
 pbc = false
 Us = [1]
-μs = LinRange(0, 2, 21)
+μs = LinRange(0, 2, 41)
 # μs = [0]
 tol = eps()
-nev = 4
+nev = 1
 kdmin = 10
 
 ô = generate_boson_matrices(dim=d)

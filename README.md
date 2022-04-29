@@ -250,6 +250,6 @@ and describes bosonic particles hopping on a discrete chain with a chemical pote
  
 > Fix the maximum value of $n_i$ for all sites to an arbitrary integer $d\geq2$. Find the matrix representations of $\hat n_i$ and $\hat a_i$ in the restricted Hilbert space. Compute the commutation relations of $\hat a_i$ in the restricted Hilbert space. What do you find? Write the Bose-Hubbard Hamiltonian in the "hard-core" limit $U\rightarrow\infty$ ($d=2$) in terms of $\hat S^{i}$. Bonus: Find out how this model is called.
  
-> Diagonalize the Hamiltonian and compute the average particle number $n(\mu,U) = \braket{\hat N}/L$, the average of $a(\mu,U) = \frac1L\sum_i\braket{\hat a_i}$ and $j(\mu,U) = \braket{\hat a^\dag_{c}\hat a^{\vphantom\dag}_{c+1}}$ where $c$ is the center site of your chain. Plot your observables as a function of $(1/U,\mu)$. Discuss your results.
+> Diagonalize the Hamiltonian and compute $n(\mu,U) = \braket{\hat N}/L$, $(\Delta N)^2 = \braket{\hat N^2}-\braket{\hat N}^2$, $a(\mu,U) = \braket{\hat a_c}$ and $j(\mu,U) = \braket{\hat a^\dag_{c}\hat a^{\vphantom\dag}_{c+1}}$ where $c$ is the center site of your chain. Plot your observables as a density plot with the two axes $(t/U,\mu/U)$. Discuss your results.
 
-> Plot the real space distribution of $a_i(\mu, U) = \braket{\hat a_i}$. Comment on how you can use this information to diagonalize the Hamiltonian more efficiently. Bonus: Derive an analytic solution of the Bose-Hubbard model with the mean-field approximation.
+> Bonus: Derive an analytic solution of the Bose-Hubbard model using a mean-field approximation and compare with your numerical results.

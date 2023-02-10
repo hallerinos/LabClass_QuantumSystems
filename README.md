@@ -4,12 +4,10 @@ During this two-day lab class, you will learn basic analytic and computational m
 On both days, you will receive lectures in the morning, followed by programming sessions in the afternoon.
 The course requires a solid knowledge of linear algebra and quantum mechanics, and programming will be done using the Julia or Python language, depending on the students preference.
 
-You will need to develop your own codes in order to investigate an assignment, and you may choose one of three subjects, with increasing complexity
-1. The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets (easy)
+The basics will be studied hands-on on particular assignments under the subject: "The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets".
+Depending on the progress in the first topic, follow-up assignments may be chosen from one of the following:
 2. The Bose-Hubbard model: superfluids and Mott-insulators (intermediate)
 3. Topological quantum matter: exotic bound modes and non-local order parameters (advanced)
-
-You need to tell me which topic you like after the first day, based on which I prepare a lecture and a specific assignment for the second day.
 
 # Exact Diagonalization
 This technique is a brute-force approach to numerical simulations of condensed matter systems, because it constructs the Hamiltonian operator in a suitable vector space, followed by a straightforward diagonalization in order to access the spectrum.

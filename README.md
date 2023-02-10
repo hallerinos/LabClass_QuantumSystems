@@ -1,8 +1,8 @@
 # [Theory of Quantum Systems for Beginners](https://github.com/hallerinos/LabClass_QuantumSystems)
 
-During this two-day lab class, you will learn basic analytic and computational methods we use in the [Theory of Mesoscopic Quantum Systems](https://wwwfr.uni.lu/recherche/fstm/dphyms/research/theory_of_mesoscopic_quantum_systems) group.
+During this two-day lab class, you will learn basic analytic and computational methods we use in the [Theory of Mesoscopic Quantum Systems](https://www.tmqs.lu/) group.
 On both days, you will receive lectures in the morning, followed by programming sessions in the afternoon.
-We focus on two important techniques, exact diagonalization (ED) and matrix product states (MPS).
+The course requires a solid knowledge of linear algebra and quantum mechanics, and programming will be done using the Julia or Python language, depending on the students preference.
 
 You will need to develop your own codes in order to investigate an assignment, and you may choose one of three subjects, with increasing complexity
 1. The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets (easy)

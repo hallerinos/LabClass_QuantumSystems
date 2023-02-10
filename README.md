@@ -2,7 +2,7 @@
 
 During this two-day lab class, you will learn basic analytic and computational methods we use in the [Theory of Mesoscopic Quantum Systems](https://www.tmqs.lu/) group.
 On both days, you will receive lectures in the morning, followed by programming sessions in the afternoon.
-The course requires a solid knowledge of linear algebra and quantum mechanics, and programming will be done using the Julia or Python language, depending on the students preference.
+The course requires a solid knowledge of linear algebra and basic quantum mechanics, and programming will be done using the Julia or Python language, depending on the students preference.
 
 The basics will be studied hands-on on particular assignments under the subject: "The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets".
 Depending on the progress in the first topic, follow-up assignments may be chosen from one of the following:

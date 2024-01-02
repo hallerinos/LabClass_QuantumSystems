@@ -12,7 +12,7 @@ for dist in [rand, randn]
     for (id, M) in enumerate(Ms)
         A = sparse(dist(M,M))
         A = A + A'
-        t_pows[id] = @elapsed λ_pow, b_pow, info = pow(A; outputlevel=0)
+        t_pows[id] = @elapsed λ_pow, b_pow, info = pow(A; outputlevel=1)
         n_pows[id] = info["numiter"]
         t_KKs[id] = @elapsed λ_KK, b_KK, info = eigsolve(A, dist(size(A,2)), 1, :LM)
         n_KKs[id] = info.numiter

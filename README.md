@@ -2,7 +2,7 @@
 
 During this two-day lab class, you will learn basic analytic and computational methods we use in the [Theory of Mesoscopic Quantum Systems](https://www.tmqs.lu/) group.
 On both days, you will receive lectures in the morning, followed by programming sessions in the afternoon.
-The course requires a solid knowledge of linear algebra and basic quantum mechanics, and programming will be done using the Julia or Python language, depending on the students preference.
+The course requires a solid knowledge of linear algebra and basic quantum mechanics, and programming will be done using the Julia language.
 
 The basics will be studied hands-on on particular assignments under the subject: "The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets".
 Depending on the progress in the first topic, follow-up assignments may be chosen from one of the following:
@@ -60,7 +60,7 @@ in which $\bm r_i$ denotes some position in a Bravais lattice, and $\hat S^k_{\b
 J denotes the binding energy between adjacent spins ($\braket{i,j}$ denotes a constrained sum over nearest neighbors only), and $h$ is the magnetic field amplitude associated with the Zeeman coupling.
 The spin operators satisfy the same algebraic commutation relations as orbital angular momentum, i.e.
 $$
-[\hat S^i,\hat S^j] = i\hbar\varepsilon_{ijk}\hat S^l
+[\hat S^i,\hat S^j] = i\hbar\varepsilon_{ijk}\hat S^k
 $$
 and they can be represented in terms of the Pauli matrices
 $$

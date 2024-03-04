@@ -17,7 +17,7 @@ $$
 \hat H \ket{\psi_n} = E_n\ket{\psi_n}
 $$
 in which $\hat H$ corresponds to the Hamiltonian operator and $\ket{\psi_n}\in\mathcal H$ is the corresponding eigenstate of $\hat H$ with eigenvalue $E_n$.
-Note that the Hamiltonian can be represented as a matrix in an arbitrary basis $\{\phi_n\}$, with matrix elements $H_{mn}^\phi = \braket{\phi_m | \hat H|\phi_n}$.
+Note that the Hamiltonian can be represented as a matrix in an orthonormal basis $\{\phi_n\}$, with matrix elements $H_{mn}^\phi = \braket{\phi_m | \hat H|\phi_n}$.
 The Hamiltonian in this notation is simply 
 $$
 \hat H = H_{mn}^\phi\ket{\phi_m}\bra{\phi_n}.

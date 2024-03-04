@@ -6,7 +6,7 @@ The course requires a solid knowledge of linear algebra and basic quantum mechan
 
 The basics will be studied hands-on on particular assignments under the subject: "The Ising model: spontaneous symmetry breaking, local order parameters, order and disorder in quantum magnets".
 Depending on the progress in the first topic, follow-up assignments may be chosen from one of the following:
-"The Bose-Hubbard model: superfluids and Mott-insulators (intermediate)", or "Topological quantum matter: exotic bound modes and non-local order parameters (advanced)".
+"The Bose-Hubbard model: superfluids and Mott-insulators" (intermediate), "Matrix Product States: A variational approach to the quantum many-body problem" (intermediate) or "Topological quantum matter: exotic bound modes and non-local order parameters" (advanced).
 
 # Exact Diagonalization
 This technique is a brute-force approach to numerical simulations of condensed matter systems, because it constructs the Hamiltonian operator in a suitable vector space, followed by a straightforward diagonalization in order to access the spectrum.
